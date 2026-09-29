@@ -1,97 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Déjà Deli - 3D Menu by MDS</title>
+    <title>Déjà Deli - 3D Menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Official Google Model Viewer Scripts -->
     <script type="module" src="https://unpkg.com"></script>
-    <script nomodule src="https://unpkg.com"></script>
-
     <style>
       body { margin: 0; padding: 0; font-family: sans-serif; background: #ffffff; overflow: hidden; }
-
-      model-viewer {
-        width: 100vw; height: 100vh; display: block;
-        background: radial-gradient(circle at 50% 40%, #fdfdfd 0%, #e8e8e8 60%, #d6d6d6 100%);
-      }
-
-      /* Logo background color locked to match image exactly */
-      #splash-container {
-        position: absolute; width: 100vw; height: 100vh; top: 0; left: 0;
-        background-color: #F2EAD3; display: flex; flex-direction: column;
-        justify-content: center; align-items: center; z-index: 999;
-        transition: opacity 0.5s ease;
-      }
+      model-viewer { width: 100vw; height: 100vh; display: block; background: radial-gradient(circle at 50% 40%, #fdfdfd 0%, #e8e8e8 60%, #d6d6d6 100%); }
+      #splash-container { position: absolute; width: 100vw; height: 100vh; top: 0; left: 0; background-color: #F2EAD3; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; transition: opacity 0.5s ease; }
       #client-logo { width: 220px; height: auto; margin-bottom: 10px; }
       #loading-text { font-size: 14px; color: #73534C; margin-top: 5px; font-style: italic; font-weight: bold; }
-      
-      /* Muhmmad Digital Solution Official Branding Tag */
-      #agency-credit { 
-        position: absolute; bottom: 25px; font-size: 13px; 
-        color: #73534C; font-weight: bold; letter-spacing: 0.5px;
-        background: rgba(255, 255, 255, 0.6); padding: 6px 16px; border-radius: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      }
+      #agency-credit { position: absolute; bottom: 25px; font-size: 13px; color: #73534C; font-weight: bold; background: rgba(255, 255, 255, 0.6); padding: 6px 16px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
       #agency-credit span { color: #d9383a; }
-
-      #ar-button {
-        position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-        background-color: #73534C; color: #ffffff; border: none; border-radius: 30px;
-        padding: 14px 28px; font-size: 16px; font-weight: bold; display: flex;
-        align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); z-index: 10;
-      }
+      #ar-button { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: #73534C; color: #ffffff; border: none; border-radius: 30px; padding: 14px 28px; font-size: 16px; font-weight: bold; z-index: 10; }
     </style>
   </head>
   <body>
     
     <div id="splash-container">
-      <!-- Uploaded logo path fixed -->
-      <img id="client-logo" src="deja_logo.jpg" alt="Déjà Deli Logo" onerror="this.style.display='none'">
-      <div id="loading-text">Loading Interactive 3D Dessert...</div>
+      <!-- Image name space formatting fixed to clear browser paths -->
+      <img id="client-logo" src="twice da spice logo.jpg" alt="Déjà Deli Logo" onerror="this.src='twice da spice logo.jpg'">
+      <div id="loading-text">Optimizing Immersive 3D Experience...</div>
       <div id="agency-credit">Created by <span>Muhmmad Digital Solution</span></div>
     </div>
 
     <model-viewer
       id="menu-model"
       src="Toast.glb"
+      loading="eager"
       alt="3D Premium Dessert Model"
-      ar
-      ar-modes="quick-look webxr scene-viewer"
-      ar-scale="auto"
-      camera-controls
-      touch-action="none"
-      auto-rotate
-      shadow-intensity="1.5"
-      environment-image="neutral"
+      ar ar-modes="quick-look webxr scene-viewer" ar-scale="auto"
+      camera-controls auto-rotate shadow-intensity="1.5"
+      camera-target="0m 0m 0m"
       camera-orbit="0deg 75deg 105%"
-      camera-target="auto auto auto"
       interaction-prompt="none">
-
-      <button id="ar-button" slot="ar-button">
-        📱 View on Your Table
-      </button>
+      <button id="ar-button" slot="ar-button">📱 View on Your Table</button>
     </model-viewer>
 
     <script>
       const splash = document.getElementById('splash-container');
       const modelViewer = document.getElementById('menu-model');
       let removed = false;
-
       function removeSplash() {
         if (removed) return;
         removed = true;
         splash.style.opacity = 0;
         setTimeout(() => splash.remove(), 500);
       }
-
       modelViewer.addEventListener('load', removeSplash);
-      modelViewer.addEventListener('error', (e) => {
-        console.error('model-viewer failed to load the GLB:', e.detail);
-        removeSplash();
-      });
-      setTimeout(removeSplash, 4000);
+      // Hard buffer limit set to release engine even if file is heavy
+      setTimeout(removeSplash, 3500);
     </script>
   </body>
 </html>
