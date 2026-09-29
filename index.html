@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Official Google Model Viewer Scripts -->
-    <script type="module" src="https://unpkg.com"></script>
-    <script nomodule src="https://unpkg.com"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer-legacy.js"></script>
 
     <style>
       body { margin: 0; padding: 0; font-family: sans-serif; background: #ffffff; overflow: hidden; }
@@ -17,7 +17,6 @@
         background: radial-gradient(circle at 50% 40%, #fdfdfd 0%, #e8e8e8 60%, #d6d6d6 100%);
       }
 
-      /* Luxury Cream Splash Screen Container */
       #splash-container {
         position: absolute; width: 100vw; height: 100vh; top: 0; left: 0;
         background-color: #F2EAD3; display: flex; flex-direction: column;
@@ -25,13 +24,12 @@
         transition: opacity 0.5s ease;
       }
       
-      /* Client Custom Logo Layout Control */
       #client-logo { width: 220px; height: auto; margin-bottom: 5px; }
       
-      /* Dynamic Tracking Text Sign */
       #agency-credit { 
+        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
         font-size: 13px; color: #73534C; font-weight: bold; 
-        letter-spacing: 0.5px; margin-top: 15px; background: rgba(255, 255, 255, 0.6); 
+        letter-spacing: 0.5px; background: rgba(255, 255, 255, 0.6); 
         padding: 6px 18px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       }
       #agency-credit span { color: #d9383a; }
@@ -48,17 +46,12 @@
   </head>
   <body>
     
-    <!-- Customized Client Splash Screen Network -->
     <div id="splash-container">
-      <!-- Client Custom Logo Locked -->
       <img id="client-logo" src="logo.jpg" alt="Déjà Deli Logo" onerror="this.style.display='none'">
-      
-      <!-- Agency Signature Credit Placed Directly Below the Logo Block -->
-      <div id="agency-credit">Created by <span>Muhmmad Digital Solution</span></div>
+      <div id="agency-credit">Created by <span>Muhammad Digital Solution</span></div>
       <div id="loading-text">Calibrating Immersive 3D View...</div>
     </div>
 
-    <!-- auto-camera-target locks framing onto Tripo mesh bounds automatically -->
     <model-viewer
       id="menu-model"
       src="Toast.glb"
@@ -98,8 +91,7 @@
         console.error('model-viewer failed to load the GLB:', e.detail);
         removeSplash();
       });
-      setTimeout(removeSplash, 4000); // Optimized fade buffer
+      setTimeout(removeSplash, 4000);
     </script>
   </body>
 </html>
-
