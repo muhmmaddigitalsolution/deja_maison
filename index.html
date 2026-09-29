@@ -17,24 +17,26 @@
         background: radial-gradient(circle at 50% 40%, #fdfdfd 0%, #e8e8e8 60%, #d6d6d6 100%);
       }
 
+      /* Fixed Luxury Cream Splash Screen Framework */
       #splash-container {
         position: absolute; width: 100vw; height: 100vh; top: 0; left: 0;
         background-color: #F2EAD3; display: flex; flex-direction: column;
         justify-content: center; align-items: center; z-index: 999;
-        transition: opacity 0.5s ease;
+        opacity: 1; transition: opacity 0.5s ease, visibility 0.5s;
       }
       
-      #client-logo { width: 220px; height: auto; margin-bottom: 5px; }
+      #client-logo { width: 220px; height: auto; display: block; margin: 0 auto 15px auto; }
       
+      /* Fixed relative alignment collision inside containers */
       #agency-credit { 
-        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
         font-size: 13px; color: #73534C; font-weight: bold; 
         letter-spacing: 0.5px; background: rgba(255, 255, 255, 0.6); 
-        padding: 6px 18px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        padding: 8px 20px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        margin-top: 10px; text-align: center;
       }
       #agency-credit span { color: #d9383a; }
 
-      #loading-text { font-size: 12px; color: #73534C; margin-top: 8px; font-style: italic; opacity: 0.8; }
+      #loading-text { font-size: 12px; color: #73534C; margin-top: 12px; font-style: italic; opacity: 0.8; }
 
       #ar-button {
         position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -46,16 +48,19 @@
   </head>
   <body>
     
+    <!-- Fixed Structure: Brand Logo + MDS Signature Combined -->
     <div id="splash-container">
       <img id="client-logo" src="logo.jpg" alt="Déjà Deli Logo" onerror="this.style.display='none'">
       <div id="agency-credit">Created by <span>Muhammad Digital Solution</span></div>
       <div id="loading-text">Calibrating Immersive 3D View...</div>
     </div>
 
+    <!-- auto camera settings forced for high-poly Tripo meshes -->
     <model-viewer
       id="menu-model"
       src="Toast.glb"
       loading="eager"
+      reveal="auto"
       alt="3D Premium Dessert Model"
       ar
       ar-modes="quick-look webxr scene-viewer"
@@ -65,8 +70,8 @@
       auto-rotate
       shadow-intensity="1.5"
       environment-image="neutral"
-      camera-target="0m 0m 0m"
-      camera-orbit="auto auto auto"
+      camera-orbit="0deg 75deg auto"
+      camera-target="auto auto auto"
       interaction-prompt="none">
 
       <button id="ar-button" slot="ar-button">
@@ -83,15 +88,25 @@
         if (removed) return;
         removed = true;
         splash.style.opacity = 0;
-        setTimeout(() => splash.remove(), 500);
+        setTimeout(() => {
+          splash.style.display = 'none';
+          splash.remove();
+        }, 500);
       }
 
-      modelViewer.addEventListener('load', removeSplash);
-      modelViewer.addEventListener('error', (e) => {
-        console.error('model-viewer failed to load the GLB:', e.detail);
+      // Instant trigger on engine bundle load completion
+      modelViewer.addEventListener('load', () => {
+        console.log("3D Toast Model successfully loaded in canvas!");
         removeSplash();
       });
-      setTimeout(removeSplash, 4000);
+
+      modelViewer.addEventListener('error', (e) => {
+        console.error('Model-viewer failed execution:', e.detail);
+        removeSplash();
+      });
+
+      // Fail-safe hardware timeout bypass
+      setTimeout(removeSplash, 4500);
     </script>
   </body>
 </html>
