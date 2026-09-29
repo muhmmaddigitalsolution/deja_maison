@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Déjà Deli - 3D Menu by MDS</title>
+    <title>Déjà Deli - Interactive 3D Menu by MDS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,22 +17,26 @@
         background: radial-gradient(circle at 50% 40%, #fdfdfd 0%, #e8e8e8 60%, #d6d6d6 100%);
       }
 
+      /* Luxury Cream Splash Screen Container */
       #splash-container {
         position: absolute; width: 100vw; height: 100vh; top: 0; left: 0;
         background-color: #F2EAD3; display: flex; flex-direction: column;
         justify-content: center; align-items: center; z-index: 999;
         transition: opacity 0.5s ease;
       }
-      #client-logo { width: 220px; height: auto; margin-bottom: 10px; }
-      #loading-text { font-size: 14px; color: #73534C; margin-top: 5px; font-style: italic; font-weight: bold; }
       
+      /* Client Custom Logo Layout Control */
+      #client-logo { width: 220px; height: auto; margin-bottom: 5px; }
+      
+      /* Dynamic Tracking Text Sign */
       #agency-credit { 
-        position: absolute; bottom: 25px; font-size: 13px; 
-        color: #73534C; font-weight: bold; letter-spacing: 0.5px;
-        background: rgba(255, 255, 255, 0.6); padding: 6px 16px; border-radius: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        font-size: 13px; color: #73534C; font-weight: bold; 
+        letter-spacing: 0.5px; margin-top: 15px; background: rgba(255, 255, 255, 0.6); 
+        padding: 6px 18px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       }
       #agency-credit span { color: #d9383a; }
+
+      #loading-text { font-size: 12px; color: #73534C; margin-top: 8px; font-style: italic; opacity: 0.8; }
 
       #ar-button {
         position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -44,13 +48,17 @@
   </head>
   <body>
     
+    <!-- Customized Client Splash Screen Network -->
     <div id="splash-container">
+      <!-- Client Custom Logo Locked -->
       <img id="client-logo" src="logo.jpg" alt="Déjà Deli Logo" onerror="this.style.display='none'">
-      <div id="loading-text">Loading Interactive 3D Dessert...</div>
+      
+      <!-- Agency Signature Credit Placed Directly Below the Logo Block -->
       <div id="agency-credit">Created by <span>Muhmmad Digital Solution</span></div>
+      <div id="loading-text">Calibrating Immersive 3D View...</div>
     </div>
 
-    <!-- camera-target override forces the rendering engine onto the exact center center -->
+    <!-- auto-camera-target locks framing onto Tripo mesh bounds automatically -->
     <model-viewer
       id="menu-model"
       src="Toast.glb"
@@ -90,7 +98,8 @@
         console.error('model-viewer failed to load the GLB:', e.detail);
         removeSplash();
       });
-      setTimeout(removeSplash, 4000);
+      setTimeout(removeSplash, 4000); // Optimized fade buffer
     </script>
   </body>
 </html>
+
