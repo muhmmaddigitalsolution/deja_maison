@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Fixed official scripts via fast cdn execution paths -->
+    <!-- Official Google Model Viewer Scripts -->
     <script type="module" src="https://unpkg.com"></script>
     <script nomodule src="https://unpkg.com"></script>
 
@@ -45,15 +45,16 @@
   <body>
     
     <div id="splash-container">
-      <!-- Image mapping name forced to locked clean asset -->
       <img id="client-logo" src="logo.jpg" alt="Déjà Deli Logo" onerror="this.style.display='none'">
       <div id="loading-text">Loading Interactive 3D Dessert...</div>
       <div id="agency-credit">Created by <span>Muhmmad Digital Solution</span></div>
     </div>
 
+    <!-- camera-target override forces the rendering engine onto the exact center center -->
     <model-viewer
       id="menu-model"
       src="Toast.glb"
+      loading="eager"
       alt="3D Premium Dessert Model"
       ar
       ar-modes="quick-look webxr scene-viewer"
@@ -63,8 +64,8 @@
       auto-rotate
       shadow-intensity="1.5"
       environment-image="neutral"
-      camera-orbit="0deg 75deg 105%"
-      camera-target="auto auto auto"
+      camera-target="0m 0m 0m"
+      camera-orbit="auto auto auto"
       interaction-prompt="none">
 
       <button id="ar-button" slot="ar-button">
